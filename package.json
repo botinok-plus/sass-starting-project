@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "gulp watch"
+    "build": "npm i -D gulp gulp-autoprefixer gulp-concat gulp-csso gulp-csso gulp-imagemin gulp-rename gulp-sass gulp-uglify gulp-shorthand",
+    "start": "gulp watch"
   },
   "repository": {
     "type": "git",
