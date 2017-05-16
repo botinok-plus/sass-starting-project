@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm i -D gulp gulp-autoprefixer gulp-concat gulp-csso gulp-csso gulp-imagemin gulp-rename gulp-sass gulp-uglify gulp-shorthand",
+    "build": "npm i -D browser-sync gulp gulp-autoprefixer gulp-concat gulp-csso gulp-csso gulp-imagemin gulp-rename gulp-sass gulp-uglify gulp-shorthand",
     "start": "gulp watch"
   },
   "repository": {
@@ -28,8 +28,6 @@
     "gulp-sass": "^3.1.0",
     "gulp-uglify": "^2.1.2",
     "gulp-watch": "^4.3.11"
-  },
-  "dependencies": {
     "gulp-shorthand": "^1.1.0"
-  }
+  },
 }
