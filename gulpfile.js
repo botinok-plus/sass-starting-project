@@ -62,8 +62,8 @@ gulp.task('browser-sync', ['styles'], function() {
 
 // watch
 gulp.task('watch', ['browser-sync', 'styles', 'scripts'], function() {
-	gulp.watch(path.sass + '**/*.sass', ['styles']);
-	gulp.watch(path.srcjs + '**/*.js', ['scripts']);
+	gulp.watch(path.sass + '**/**/*.sass', ['styles']);
+	gulp.watch(path.srcjs + '**/**/*.js', ['scripts']);
 	gulp.watch(path.dist + '*.html').on('change', browserSync.reload);
 	gulp.watch(path.css + '*.css').on('change', browserSync.reload);
 });

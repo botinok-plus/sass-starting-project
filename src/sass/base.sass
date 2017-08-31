@@ -1,0 +1,84 @@
+/* Variables */
+$base-ff: 'Roboto', sans-serif
+$link-color: red
+$link-action-color: lighten(red, 15%)
+$base-text-color: #666
+
+/* Base */
+*,
+body
+	font-family: $base-ff
+	word-wrap: break-word
+
+html,
+body
+	background: #fff
+	font-size: 15px
+	min-width: 320px
+
+body
+	animation-name: fadeIn
+	animation-duration: .6s
+	position: relative
+
+a
+	color: $link-color
+	transition: all .2s ease
+
+	&:focus,
+	&:hover
+		text-decoration: none
+
+	&:focus
+		color: $link-color
+
+	&:hover
+		color: $link-action-color
+
+nav
+	ul
+		margin: 0
+		padding: 0
+		list-style: none
+
+		&:not(:last-child)
+			margin-bottom: 0
+
+		> li
+			&:not(:last-child)
+				margin-bottom: 0
+
+img
+	max-width: 100%
+	height: auto
+
+.reset
+	padding: 0
+	margin: 0
+	list-style: none
+
+	&:not(:last-child)
+		margin-bottom: 0
+
+	> li
+		&:not(:last-child)
+			margin-bottom: 0
+
+.reset-inline-spacing
+	letter-spacing: -1px
+	font-size: 0
+
+	> *
+		letter-spacing: 0
+		font-size: 1rem
+
+.responsive-bg
+	background-position: 50% 50% !important
+	background-size: cover !important
+	background-repeat: no-repeat !important
+
+.no-pl
+	padding-left: 0
+
+.no-pr
+	padding-right: 0
