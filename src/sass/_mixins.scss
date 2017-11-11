@@ -26,6 +26,18 @@
 	}
 }
 
+//px to rem calculator
+@function px-rem($px) {
+	$rem: $px / $base-fz;
+	@return $px * 1rem;
+}
+
+//rem font-size with fallback
+@mixin font-size($size) {
+	font-size: $size;
+	font-size: px-rem($size);
+}
+
 //placeholder (@include placeholder { })
 @mixin placeholder {
 	&[placeholder]  { @content; }
