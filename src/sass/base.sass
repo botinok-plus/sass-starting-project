@@ -1,10 +1,3 @@
-/* Variables */
-$base-ff: 'Roboto', sans-serif
-$base-fz: 15px
-$link-color: red
-$link-action-color: lighten($link-color, 15%)
-$base-text-color: #666
-
 /* Base */
 *,
 body
@@ -15,7 +8,7 @@ html,
 body
 	background: #fff
 	font-size: $base-fz
-	min-width: 320px
+	min-width: $screen-xs-min
 
 body
 	animation-name: fadeIn
@@ -44,6 +37,7 @@ nav
 img
 	max-width: 100%
 	height: auto
+	backface-visibility: hidden
 
 .reset-inline-spacing
 	letter-spacing: -1px
@@ -75,7 +69,6 @@ img
 		background: none
 		line-height: 1.2em
 		text-align: center
-
 
 .no-paddings
 	padding: 0

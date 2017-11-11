@@ -25,3 +25,81 @@
 		src: $src;
 	}
 }
+
+//placeholder (@include placeholder { })
+@mixin placeholder {
+	&[placeholder]  { @content; }
+	&:-moz-placeholder { @content; }
+	&::-moz-placeholder { @content; }
+	&:-ms-input-placeholder { @content; }
+	&::-webkit-input-placeholder { @content; }
+}
+
+//text-elipsis (@include text-elipsis(120px))
+@mixin text-elipsis($container-width) {
+	max-width: $container-width;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+//responsive-ratio (@include text-elipsis(16,9))
+@mixin responsive-ratio($x,$y, $pseudo: false) {
+	$padding: unquote( ( $y / $x ) * 100 + '%' );
+	@if $pseudo {
+		&:before {
+			content: '';
+			display: block;
+			position: relative;
+			width: 100%;
+			padding-top: $padding;
+		}
+	} @else {
+		padding-top: $padding;
+	}
+}
+
+//responsive breackpoints
+@mixin bp-lg {
+	@media (min-width: $screen-lg-min) {
+		@content;
+	}
+}
+
+@mixin bp-md {
+	@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+		@content;
+	}
+}
+
+@mixin bp-sm {
+	@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+		@content;
+	}
+}
+
+@mixin bp-xs {
+	@media (max-width: $screen-xs-max) {
+		@content;
+	}
+}
+
+@mixin bp-custom($resolution-min: false, $resolution-max: false) {
+	@if $resolution-min {
+		@if $resolution-max {
+			@media (min-width: $resolution-min) and (max-width: $resolution-max) {
+				@content;
+			}
+		} @else {
+			@media (min-width: $resolution-min) {
+				@content;
+			}
+		}
+	} @else {
+		@if $resolution-max {
+			@media (max-width: $resolution-max) {
+				@content;
+			}
+		}
+	}
+}
