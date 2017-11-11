@@ -1,7 +1,8 @@
 /* Variables */
 $base-ff: 'Roboto', sans-serif
+$base-fz: 15px
 $link-color: red
-$link-action-color: lighten(red, 15%)
+$link-action-color: lighten($link-color, 15%)
 $base-text-color: #666
 
 /* Base */
@@ -13,7 +14,7 @@ body
 html,
 body
 	background: #fff
-	font-size: 15px
+	font-size: $base-fz
 	min-width: 320px
 
 body
@@ -21,48 +22,28 @@ body
 	animation-duration: .6s
 	position: relative
 
+	&.disabled_scroll
+		overflow: hidden
+		height: 100vh
+
 a
 	color: $link-color
-	transition: all .2s ease
+	transition: color .2s ease
 
 	&:focus,
 	&:hover
 		text-decoration: none
-
-	&:focus
-		color: $link-color
 
 	&:hover
 		color: $link-action-color
 
 nav
 	ul
-		margin: 0
-		padding: 0
-		list-style: none
-
-		&:not(:last-child)
-			margin-bottom: 0
-
-		> li
-			&:not(:last-child)
-				margin-bottom: 0
+		@extend .reset-list
 
 img
 	max-width: 100%
 	height: auto
-
-.reset
-	padding: 0
-	margin: 0
-	list-style: none
-
-	&:not(:last-child)
-		margin-bottom: 0
-
-	> li
-		&:not(:last-child)
-			margin-bottom: 0
 
 .reset-inline-spacing
 	letter-spacing: -1px
@@ -70,15 +51,63 @@ img
 
 	> *
 		letter-spacing: 0
-		font-size: 1rem
+		font-size: $base-fz
 
 .responsive-bg
 	background-position: 50% 50% !important
 	background-size: cover !important
 	background-repeat: no-repeat !important
 
+.reset
+	padding: 0
+	margin: 0
+
+	&-list
+		@extend .reset
+		list-style: none
+
+.no-paddings
+	padding: 0
+
+.no-margins
+	margin: 0
+
 .no-pl
 	padding-left: 0
 
 .no-pr
 	padding-right: 0
+
+.no-pt
+	padding-top: 0
+
+.no-pb
+	padding-bottom: 0
+
+.no-mr
+	margin-right: 0
+
+.no-ml
+	margin-left: 0
+
+.no-mt
+	margin-top: 0
+
+.no-mb
+	margin-bottom: 0
+
+.no-h-paddings
+	padding-left: 0
+	padding-right: 0
+
+.no-v-paddings
+	padding-top: 0
+	padding-bottom: 0
+
+.no-v-margins
+	margin-top: 0
+	margin-bottom: 0
+
+.no-h-margins
+	margin-left: 0
+	margin-right: 0

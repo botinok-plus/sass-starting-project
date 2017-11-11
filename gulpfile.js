@@ -3,11 +3,12 @@ var gulp = require('gulp'),
 	browserSync = require('browser-sync').create(), // синхронизация браузеров и live-reload
 	sass = require('gulp-sass'), // компиляция sass
 	concat = require('gulp-concat'), // конкатенация
-	csso = require('gulp-csso'), // сокращение свойств css
 	rename = require('gulp-rename'), // сокращение свойств css
-	imagemin = require('gulp-imagemin'), // оптимизация изображений
-	shorthand = require('gulp-shorthand'), // изменение файла
-	uglify = require('gulp-uglify'); // сжатие JS
+	csso = require('gulp-csso'), // сжатие css
+	gcmq = require('gulp-group-css-media-queries'), // группирование media
+	uglify = require('gulp-uglify'), // сжатие JS
+	sourcemaps = require('gulp-sourcemaps'), // карта
+	deletefile = require('gulp-delete-file'); // удаление файлов
 
 //path's
 var path = {
@@ -21,20 +22,14 @@ var path = {
 
 //Styles
 gulp.task('styles', function() {
-	console.log(path.sass);
 	return gulp.src(path.sass + 'inc.sass')
 		.pipe(sass().on('error', sass.logError))
 		.pipe(rename({
 				basename: 'styles',
-				suffix: '.min'
 			})
 		)
 		.pipe(autoprefixer({browsers: ['last 50 versions'], cascade: false}))
-		.pipe(shorthand())
-		.pipe(csso({
-			restructure: false,
-			sourceMap: true,
-		}))
+		.pipe(gcmq())
 		.pipe(gulp.dest(path.css))
 		.pipe(browserSync.stream());
 });
@@ -42,11 +37,6 @@ gulp.task('styles', function() {
 //scripts
 gulp.task('scripts', function() {
 	return gulp.src(path.srcjs + '*.js')
-		.pipe(uglify())
-		.pipe(rename({
-				suffix: '.min'
-			})
-		)
 		.pipe(gulp.dest(path.js))
 });
 
@@ -61,9 +51,46 @@ gulp.task('browser-sync', ['styles'], function() {
 });
 
 // watch
-gulp.task('watch', ['browser-sync', 'styles', 'scripts'], function() {
-	gulp.watch(path.sass + '**/**/*.sass', ['styles']);
-	gulp.watch(path.srcjs + '**/**/*.js', ['scripts']);
+gulp.task('watch', ['styles', 'scripts', 'browser-sync'], function() {
+	gulp.watch(path.sass + '**/**/**/**/**/**/**/**/*.sass', ['styles']);
+	gulp.watch(path.sass + '**/**/**/**/**/**/**/**/*.scss', ['styles']);
+	gulp.watch(path.srcjs + '**/**/**/**/**/**/**/*.js', ['scripts']);
 	gulp.watch(path.dist + '*.html').on('change', browserSync.reload);
 	gulp.watch(path.css + '*.css').on('change', browserSync.reload);
+	gulp.watch(path.js + '*.js').on('change', browserSync.reload);
 });
+//minify css
+gulp.task('minifyCSS', ['styles'], function() {
+	return gulp.src(path.css + '*.css')
+		.pipe(sourcemaps.init())
+		.pipe(csso())
+		.pipe(rename({
+				basename: 'styles',
+				suffix: '.min'
+			})
+		)
+		.pipe(sourcemaps.write('.'))
+		.pipe(gulp.dest(path.css));
+});
+// minify js
+gulp.task('minifyJS', ['scripts'], function() {
+	return gulp.src(path.js + '*.js')
+		.pipe(uglify())
+		.pipe(rename({
+				suffix: '.min'
+			})
+		)
+		.pipe(gulp.dest(path.js))
+});
+
+gulp.task('deletefile', function () {
+	var regexp = /\w*(\-\w{8}\.js){1}$|\w*(\-\w{8}\.css){1}$/;
+	gulp.src([path.js + '*.min.js', path.css + '*.min.css', path.css + '*.min.css.map'])
+		.pipe(deletefile({
+			reg: regexp,
+			deleteMatch: false
+		}));
+});
+// minify all
+gulp.task('minify', ['deletefile', 'minifyCSS', 'minifyJS']);
+

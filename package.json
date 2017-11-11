@@ -1,11 +1,11 @@
 {
   "name": "sass-starting-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "Empty project for dev",
   "main": "index.js",
   "scripts": {
-    "build": "npm i -D browser-sync gulp gulp-autoprefixer gulp-concat gulp-csso gulp-csso gulp-imagemin gulp-rename gulp-sass gulp-uglify gulp-shorthand",
-    "start": "gulp watch"
+    "start": "gulp watch",
+    "minify": "gulp minify"
   },
   "repository": {
     "type": "git",
@@ -23,11 +23,12 @@
     "gulp-autoprefixer": "^4.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-csso": "^3.0.0",
-    "gulp-imagemin": "^3.2.0",
+    "gulp-delete-file": "^1.0.2",
+    "gulp-group-css-media-queries": "^1.2.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.1",
     "gulp-uglify": "^2.1.2",
-    "gulp-watch": "^4.3.11",
-    "gulp-shorthand": "^1.1.0"
+    "gulp-watch": "^4.3.11"
   }
 }
