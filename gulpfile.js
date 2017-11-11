@@ -23,7 +23,7 @@ var path = {
 //Styles
 gulp.task('styles', function() {
 	return gulp.src(path.sass + 'inc.sass')
-		.pipe(sass().on('error', sass.logError))
+		.pipe(sass({importer: require('npm-sass').importer}).on('error', sass.logError))
 		.pipe(rename({
 				basename: 'styles',
 			})
